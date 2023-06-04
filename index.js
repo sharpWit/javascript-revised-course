@@ -71,15 +71,48 @@
 //   if (!e.className) e.className = "hilite";
 //   else e.className += "hilite";
 // }
+// ? hide images element
+// window.onload = function () {
+//   var images = document.getElementsByTagName("img");
+//   for (var i = 0; i < images.length; i++) {
+//     var image = images[i];
+//     if (image.addEventListener) image.addEventListener("click", hide, false);
+//     else image.attachEvent("onclick", hide);
+//   }
+//   function hide(event) {
+//     event.target.style.visibility = "hidden";
+//   }
+// };
+// ? date
+// var then = new Date(2010, 0, 1);
+// var later = new Date(2010, 0, 1, 1, 2, 1);
+// var now = new Date();
+// var elapsed = now - then;
+// console.log(elapsed);
+// console.log(later.getFullYear());
+// console.log(later.getMonth());
+// console.log(later.getDate());
+// console.log(later.getDay());
+// console.log(later.getHours());
+// console.log(later.getUTCHours());
+// console.log(later.toString());
+// console.log(later.toUTCString());
+// console.log(later.toLocaleDateString());
+// console.log(later.toLocaleTimeString());
+// console.log(later.toISOString());
+// ? strings
+// var s = "Hello, world";
+// console.log(
+//   s.charAt(0),
+//   s.charAt(s.length - 1),
+//   s.substring(1, 4),
+//   s.slice(-3),
+//   s.slice(1, 4),
+//   s.indexOf("1"),
+//   s.lastIndexOf("1"),
+//   s.indexOf("1", 3),
+//   s.split(","),
+//   s.replace("h", "H"),
+//   s.toUpperCase()
+// );
 // ?
-window.onload = function () {
-  var images = document.getElementsByTagName("img");
-  for (var i = 0; i < images.length; i++) {
-    var image = images[i];
-    if (image.addEventListener) image.addEventListener("click", hide, false);
-    else image.attachEvent("onclick", hide);
-  }
-  function hide(event) {
-    event.target.style.visibility = "hidden";
-  }
-};
