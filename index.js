@@ -115,4 +115,70 @@
 //   s.replace("h", "H"),
 //   s.toUpperCase()
 // );
+// ? RegExps
+// var text = "testing: 1, 2, 3";
+// var pattern = /\d+/g;
+// console.log(pattern.test(text));
+// console.log(text.search(pattern));
+// console.log(text.match(pattern));
+// console.log(text.replace(pattern, "#"));
+// console.log(text.split(/\D+/));
+// ? string methods
+// var s = "hello world!";
+// var word = s.substring(s.indexOf("") + 1, s.length);
+// console.log(word);
+// ? object and array equality
+// var a = ["a", "b", "c"];
+// var b = [];
+// for (var i = 0; i < a.length; i++) {
+//   b[i] = a[i];
+// }
+// function equalArrays(a, b) {
+//   if (a.length != b.length) return false;
+//   for (var i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+//   return true;
+// }
+// ?
+// var n = 17;
+// console.log((binary_string = n.toString(2)));
+// console.log((octal_string = "0" + n.toString(8)));
+// console.log((hex_string = "0x" + n.toString(16)));
+// ?
+// var n = 123456.789;
+// console.log(n.toFixed(0));
+// console.log(n.toFixed(2));
+// console.log(n.toFixed(5));
+// console.log(n.toExponential(1));
+// console.log(n.toExponential(3));
+// console.log(n.toPrecision(4));
+// console.log(n.toPrecision(7));
+// console.log(n.toPrecision(10));
+// ?
+// var scope = "global";
+// function checkScope() {
+//   var scope = "local";
+//   return scope;
+// }
+// console.log(checkScope());
+
+// scope = "global";
+// function checkScope2() {
+//   scope = "local";
+//   myScope = "local";
+//   return [scope, myScope];
+// }
+// console.log(checkScope2());
+// console.log(scope);
+// console.log(myScope);
+
+// var scope = "global scope";
+// function checkScope() {
+//   var scope = "local scope";
+//   function nested() {
+//     var scope = "nested scope";
+//     return scope;
+//   }
+//   return nested();
+// }
+// console.log(checkScope());
 // ?
