@@ -182,15 +182,90 @@
 // }
 // console.log(checkScope());
 // ?
-function test(o) {
-  var i = 0;
-  if (typeof o == "object") {
-    var j = 0;
-    for (var k = 0; k < 10; k++) {
-      console.log(k);
-    }
-    console.log(k);
-  }
-  console.log(j);
+// function test(o) {
+//   var i = 0;
+//   if (typeof o == "object") {
+//     var j = 0;
+//     for (var k = 0; k < 10; k++) {
+//       console.log(k);
+//     }
+//     console.log(k);
+//   }
+//   console.log(j);
+// }
+// console.log(test());
+// ?
+// for (var i = 0; i < 10; i++) console.log(i);
+// for (var i = 0, j = 10; i <= 10; i++, j--) console.log(i * j);
+// for (var i in o) console.log(i);
+//
+// function hypotenuse(x, y) {
+//   return Math.sqrt(x * x + y * y);
+// }
+// console.log(hypotenuse(3, 3));
+// recursive function
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
 }
-console.log(test());
+
+// console.log(factorial(3));
+//
+// function condition() {
+//   i = j = 1;
+//   k = 2;
+//   if (i == j) {
+//     if (j == k) {
+//       return console.log("i equals k");
+//     }
+//   } else {
+//     return console.log("i doesn't equal to j");
+//   }
+// }
+// console.log(condition());
+//
+// function convert(x) {
+//   switch (typeof x) {
+//     case "number":
+//       return x.toString(2);
+//     case "string":
+//       return '"' + x + '"';
+//     default:
+//       return String(x);
+//   }
+// }
+
+// console.log(convert(999));
+//
+// var count = 0;
+// while (count < 10) {
+//   console.log(count);
+//   count++;
+// }
+// function printArray(a) {
+//   var len = a.length,
+//     i = 0;
+//   if (len == 0) console.log("Empty array");
+//   else {
+//     do {
+//       console.log(a[i]);
+//     } while (++i < len);
+//   }
+// }
+// printArray(["a", "b", "c"]);
+//
+// function condy() {
+//   var o = { x: 1, y: 2, z: 3 };
+//   var a = [],
+//     i = o;
+//   for (i in a) console.log(i);
+// }
+// console.log(condy());
+//
+try {
+  var n = Number(prompt("Please enter a positive integer", ""));
+  var f = factorial(n);
+  alert(n + "! = " + f);
+} catch (ex) {
+  alert(ex);
+}
