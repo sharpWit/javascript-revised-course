@@ -350,3 +350,248 @@
 // } = points;
 
 // console.log(x1, x2, y1, y2);
+
+// let a;
+// let index = 0;
+// try {
+//   a[index++];
+// } catch (e) {
+//   index;
+// }
+// a?.[index++];
+// index;
+// a[index++];
+
+// function square(x, log) {
+//   log?.(x);
+//   return x * x;
+// }
+// console.log(square(5, 6));
+
+// let f = null,
+//   x = 0;
+// try {
+//   f(x++);
+// } catch (e) {
+//   x;
+// }
+// console.log(f?.(x++));
+
+// console.log(1 + {});
+// console.log(true + true);
+// console.log(2 + null);
+// console.log(2 + undefined);
+
+// let value = "jsadlfj  asd fsad f234 3 w ";
+// console.log(typeof value === "string" ? "'" + value + "'" : value.toString());
+// let n = null;
+// if (n === 1) console.log("Hello");
+// else console.log("Bye");
+
+// let i, j;
+// i = j = 1;
+// let k = 2;
+
+// if (i === j) {
+//   if (j === k) {
+//     console.log("i = k");
+//   }
+// } else {
+//   console.log("i != j");
+// }
+
+// if (i === j) {
+//   if (j === k) {
+//     console.log("i = k");
+//   } else {
+//     console.log("i != k");
+//   }
+// } else {
+//   console.log("i != j");
+// }
+
+// function convert(x) {
+//   switch (typeof x) {
+//     case "number":
+//       return x.toString(16);
+//     case "string":
+//       return '"' + x + '"';
+//     default:
+//       return String(x);
+//   }
+// }
+// console.log(convert("string"));
+
+// function printArray(a) {
+//   let len = a.length,
+//     i = 0;
+//   if (len === 0) {
+//     console.log("Empty");
+//   } else {
+//     do {
+//       console.log(a[i]);
+//     } while (++i < len);
+//   }
+// }
+// printArray([]);
+
+// let i,
+//   j,
+//   sum = 0;
+// for (i = 0, j = 5; i < 5; i++, j--) {
+//   sum += i * j;
+// }
+// console.log(sum);
+
+// let data = [1, 2, 3, 4, 5, 6, 7, 8, 9],
+//   sum = 0;
+// for (let elem of data) {
+//   sum += elem;
+// }
+
+// console.log(sum);
+// ? iterable objects
+// let o = { x: 1, y: 2, z: 3 };
+// let keys = "";
+// for (let k of Object.keys(o)) {
+//   keys += k;
+// }
+
+// // for (let elem of o) {
+// //   console.log(elem);
+// // }
+// console.log(keys);
+
+// let sum = 0;
+// for (let v of Object.values(o)) {
+//   sum += v;
+// }
+// console.log(sum);
+
+// let pairs = "";
+// for (let [k, v] of Object.entries(o)) {
+//   pairs += k + v;
+// }
+// console.log(pairs);
+// ! for/of string
+// let freq = {};
+// for (let letter of "mississippi") {
+//   if (freq[letter]) {
+//     freq[letter]++;
+//   } else {
+//     freq[letter] = 1;
+//   }
+// }
+// console.log(freq);
+// ! for/of with Set and Map
+// let text = "Na na na na na na na na Batman!";
+// let worsSet = new Set(text.split(""));
+// let unique = [];
+// for (let word of worsSet) {
+//   unique.push(word);
+// }
+
+// console.log(unique);
+
+// let m = new Map([[1, "one"]]);
+// for (let [key, value] of m) {
+//   console.log(key);
+//   console.log(value);
+// }
+
+// async function printStream(stream) {
+//   for await (let chunk of stream) {
+//     console.log(chunk);
+//   }
+// }
+// printStream(text);
+// let o = { name: "Saeed", age: 33 };
+// for (let p in o) {
+//   console.log(o[p]);
+// }
+
+// let o = { x: 1, y: 2, z: 3 };
+// let a = [],
+//   i = 0;
+// for (a[i++] in o);
+// for (let i in o) console.log(i);
+
+// const obj = {
+//   prop1: "value1",
+//   prop2: "value2",
+// };
+
+// console.log(Object.keys(obj)); // Output: ['prop1', 'prop2']
+// console.log(Object.values(obj));
+// console.log(Object.entries(obj));
+
+// for (let key in obj) {
+//   console.log(key); // Output: 'prop1', 'prop2'
+// }
+// const obj = {};
+
+// Object.defineProperty(obj, "prop", {
+//   value: "value",
+//   enumerable: false,
+// });
+
+// console.log(obj.prop); // Output: 'value'
+
+// mainloop: while (token !== null) {
+//   continue mainloop;
+// }
+
+// function getData() {
+//   return [
+//     [1, 2, 3, 4, 5, 6],
+//     [1, 2, 3, 4, 5, 6],
+//   ];
+// }
+
+// let matrix = getData();
+// let sum = 0,
+//   success = false;
+// computeSum: if (matrix) {
+//   for (let x = 0; x < matrix.length; x++) {
+//     let row = matrix[x];
+//     if (!row) break computeSum;
+//     for (let y = 0; y < row.length; y++) {
+//       let cell = row[y];
+//       if (isNaN(cell)) break computeSum;
+//       sum += cell;
+//     }
+//   }
+//   success = true;
+// }
+// console.log(matrix);
+
+// function displayObject(o) {
+//   if (!o) return;
+//   console.log("o is a truthy value");
+// }
+// console.log(displayObject("a"));
+
+// function* range(from, to) {
+//   for (let i = from; j <= to; i++) {
+//     yield i;
+//   }
+// }
+// console.log(range());
+// ? throw Error
+// function factorial(x) {
+//   if (x < 0) throw new Error("x must not be negative");
+//   // debugger;
+//   let f;
+//   for (f = 1; x > 1; f *= x, x--);
+//   return f;
+// }
+// factorial();
+// // console.log(factorial(7));
+// // ? try/catch Error
+// try {
+//   let n = Number(prompt("Please enter a positive integer", ""));
+//   let f = factorial(n);
+//   alert(n + "! = " + f);
+// } catch (ex) {
+//   alert(ex);
+// }
