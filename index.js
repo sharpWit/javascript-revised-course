@@ -595,3 +595,371 @@
 // } catch (ex) {
 //   alert(ex);
 // }
+
+// let o = { x: 1, y: 2, z: 3 };
+// o.propertyIsEnumerable("toString");
+// for (let p in o) {
+//   console.log(p);
+// }
+// for (let p in o) {
+//   if (!o.hasOwnProperty(p)) continue;
+//   console.log(p);
+// }
+// for (let p in o) {
+//   if (typeof o[p] === "function") continue;
+//   console.log(p);
+// }
+
+// console.log(Object.keys(o));
+// console.log(Object.getOwnPropertyNames(o));
+// console.log(Object.getOwnPropertySymbols(o));
+// console.log(Reflect.ownKeys(o));
+
+// let target = { x: 1 },
+//   sources = { y: 2, z: 3 };
+// for (let key of Object.keys(source)) {
+//   target[key] = source[key];
+// }
+// console.log(target);
+
+// function merge(target, ...sources) {
+//   for (let source of sources) {
+//     for (let key of Object.keys(source)) {
+//       if (!(key in target)) {
+//         target[key] = source[key];
+//       }
+//     }
+//   }
+//   return target;
+// }
+// // console.log(Object.assign({ x: 1 }, { x: 2, y: 2 }, { y: 3, z: 4 }));
+// console.log(merge({ x: 1 }, { x: 2, y: 2 }, { y: 3, z: 4 }));
+
+// let o = { x: 1, y: { z: [false, null, ""] } };
+// let s = JSON.stringify(o);
+// let p = JSON.parse(s);
+// console.log(o);
+// console.log(s);
+// console.log(p);
+
+// let point = {
+//   x: 1000,
+//   y: 2000,
+//   toString: function () {
+//     return `(${this.x}, ${this.y})`;
+//   },
+//   toLocaleString: function () {
+//     return `(${this.x.toLocaleString()}, ${this.y.toLocaleString()})`;
+//   },
+// };
+// console.log(point.toString());
+// console.log(point.toLocaleString());
+
+// let point = {
+//   x: 3,
+//   y: 4,
+//   valueOf: function () {
+//     return Math.hypot(this.x, this.y);
+//   },
+// };
+// console.log(Number(point));
+// ? Computed property names
+// let x = 1,
+//   y = 2;
+// let o = { x, y };
+// console.log(o.x + o.y);
+
+// let dynamicAge = "age";
+// let person = {
+//   name: "Saeed",
+//   [dynamicAge]: 33,
+// };
+// console.log(person.name, person[dynamicAge]);
+
+// const extension = Symbol("my extension symbol");
+// let o = {
+//   [extension]: {
+//     /* extension data stored in this object*/
+//   },
+// };
+// console.log((o[extension].x = 0));
+// ? spead operator
+// let position = { x: 0, y: 0 };
+// let dimensions = { width: 100, height: 75 };
+// let rect = { ...position, ...dimensions };
+// let rectCirc = rect.x + rect.y + rect.width + rect.height;
+// console.log(rectCirc);
+
+// let o = Object.create({ x: 1 });
+// let p = { ...o };
+// console.log(p.x); //not inherited
+// ? shorthand methods
+// let square = {
+//   area: function () {
+//     return this.side * this.side;
+//   },
+//   side: 10,
+// };
+// console.log(square.area());
+// ! ES6
+
+// let square = {
+//   area() {
+//     return this.side * this.side;
+//   },
+//   side: 10,
+// };
+// console.log(square.area());
+
+// const METHOD_NAME = "m";
+// const symbol = Symbol();
+// let weirdMethods = {
+//   "method with spaces"(x) {
+//     return x + 1;
+//   },
+//   [METHOD_NAME](x) {
+//     return x + 2;
+//   },
+//   [symbol](x) {
+//     return x + 3;
+//   },
+// };
+// console.log(weirdMethods["method with spaces"](1));
+// console.log(weirdMethods[METHOD_NAME](1));
+// console.log(weirdMethods[symbol](1));
+// ? accessor properties
+// let p = {
+//   x: 1.0,
+//   y: 1.0,
+//   get r() {
+//     return Math.hypot(this.x, this.y);
+//   },
+//   set r(newvalue) {
+//     let oldvalue = Math.hypot(this.x, this.y);
+//     let ratio = newvalue / oldvalue;
+//     this.x *= ratio;
+//     this.y *= ratio;
+//   },
+//   get theta() {
+//     return Math.atan2(this.y, this.x);
+//   },
+// };
+// console.log(p.r);
+// console.log(p.theta);
+
+// let q = Object.create(p);
+// (q.x = 3), (q.y = 4);
+// console.log(q.r);
+// console.log(q.theta);
+// ! sanity checking of property writes and returning different values on each property read
+// const serialNum = {
+//   _n: 0,
+//   get next() {
+//     return this._n++;
+//   },
+//   set next(n) {
+//     if (n > this._n) this._n = n;
+//     else throw new Error("serial number can only be set to a larger value");
+//   },
+// };
+// console.log((serialNum.next = 10));
+// console.log(serialNum.next);
+// console.log(serialNum.next);
+// console.log(serialNum.next);
+// console.log(serialNum.next);
+// console.log(serialNum.next);
+// console.log(serialNum.next);
+
+// const random = {
+//   get octet() {
+//     return Math.floor(Math.random() * 256);
+//   },
+//   get unit16() {
+//     return Math.floor(Math.random() * 65536);
+//   },
+//   get int16() {
+//     return Math.floor(Math.random() * 65536) - 32768;
+//   },
+// };
+
+// console.log(random.octet);
+// console.log(random.unit16);
+// console.log(random.int16);
+
+// let undefs = [, ,];
+// console.log(undefs);
+
+// let a = [1, 2, 3];
+// let b = [0, ...a, 4];
+
+// let original = [1, 2, 3];
+// let copy = [...original];
+// copy[0] = 0;
+// original[0];
+
+// let digits = [..."0123456789ABCDEF"];
+// console.log(digits);
+
+// let letters = [..."hello world"];
+// [...new Set(letters)];
+
+// console.log(letters);
+
+// let a = new Array(10);
+// console.log(a);
+
+// let a = new Array(5, 4, 3, 2, 1, "testing, testing");
+// console.log(a);
+
+// let a = ["world"];
+// let value = a[0];
+// a[1] = 3.14;
+// let i = 2;
+// a[i] = 3;
+// a[i + 1] = "Hello";
+// a[a[i]] = a[0];
+
+// console.log(a);
+
+// let o = {};
+// o[1] = "one";
+
+// console.log(o["1"]);
+
+// let a = new Array(5);
+// a = [];
+// a[1000] = 0;
+
+// console.log(a);
+
+// let letters = [..."Hello world"];
+// let string = "";
+// for (let letter of letters) {
+//   string += letter;
+// }
+// console.log(string);
+
+// let everyother = "";
+// for (let [index, letter] of letters.entries()) {
+//   if (index % 2 === 0) everyother += letter;
+// }
+// console.log(everyother);
+
+// let uppercase = "";
+// letters.forEach((letter) => {
+//   uppercase += letter.toUpperCase();
+// });
+// console.log(uppercase);
+
+// let vowels = "";
+// for (let i = 0; i < letters.length; i++) {
+//   let letter = letters[i];
+//   if (/[aeiou]/.test(letter)) {
+//     vowels += letter;
+//   }
+// }
+// console.log(vowels);
+// ? multidimensional array
+// let table = new Array(10);
+// for (let i = 0; i < table.length; i++) {
+//   table[i] = new Array(10);
+// }
+// for (let row = 0; row < table.length; row++) {
+//   for (let col = 0; col < table[row].length; col++) {
+//     table[row][col] = row * col;
+//   }
+// }
+// console.log(table[5][7]);
+
+// let data = [1, 2, 3, 4, 5],
+//   sum = 0;
+// data.forEach((value) => {
+//   sum += value;
+// });
+// data.forEach(function (v, i, a) {
+//   a[i] = v + 1;
+// });
+
+// console.log(sum, data);
+
+// let a = [1, 2, 3];
+// console.log(a.map((x) => x * x));
+
+// let a = [5, 4, 3, 2, 1];
+
+// console.log(a.filter((x) => x < 3));
+
+// console.log(a.filter((x, i) => i % 2 === 0));
+
+// let dense = sparse.filter(() => true);
+// a = a.filter((x) => x !== undefined && x !== null);
+
+// let a = [1, 2, 3, 4, 5];
+
+// console.log(a.every((x) => x < 10));
+
+// console.log(a.every((x) => x % 2 === 0));
+
+// let a = [1, 2, 3, 4, 5];
+// console.log(a.reduce((x, y) => x + y, 0));
+
+// console.log(a.reduce((x, y) => x * y, 1));
+
+// console.log(a.reduce((x, y) => (x > y ? x : y)));
+
+// let a = [1, [2,[3, [4]]]]
+// console.log(a.flat(1));
+// console.log(a.flat(2));
+// console.log(a.flat(3));
+// console.log(a.flat(4));
+// console.log(a.flat(5));
+
+// let phrases = ["hello world", "the definitive guide"];
+// let words = phrases.flatMap((phrase) => phrase.split(" "));
+// console.log(words);
+
+// let flat = [-2, -1, 1, 2].flatMap((x) => (x < 0 ? [] : Math.sqrt(x)));
+
+// console.log(flat);
+
+// let a = ["banana", "cherry", "apple"];
+// console.log(a.sort());
+
+// let a = [33, 4, 1111, 222];
+// console.log(a.sort());
+// a.sort(function (a, b) {
+//   return a - b;
+// });
+// console.log(a.sort((a, b) => b - a));
+// ? array join
+// let a = [1, 2, 3];
+// console.log(a.join(" "));
+
+// let b = new Array(10);
+// console.log(b.join("-"));
+
+// let a = {};
+
+// let i = 0;
+// while (i < 10) {
+//   a[i] = i * i;
+//   i++;
+// }
+// a.length = i;
+
+// let total = 0;
+// for (let j = 0; j < a.length; j++) {
+//   total += a[j];
+// }
+// console.log(total);
+
+// const sparseArray = [];
+// sparseArray[0] = "value1";
+// sparseArray[2] = "value2";
+
+// console.log(sparseArray.length); // Output: 3
+// console.log(sparseArray); // Output: [ 'value1', <1 empty slot>, 'value2' ]
+
+// for (let element of sparseArray) {
+//   console.log(element); // Output: 'value1', 'value2'
+// }
