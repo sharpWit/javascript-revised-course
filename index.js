@@ -345,3 +345,323 @@
 // console.log(sum([1, 2, 3]));
 // // console.log(sum(1, 2, 3));
 // console.log(sum([1, 2, "3"]));
+
+// ? function as values
+// function add(x, y) {
+//   return x + y;
+// }
+// function subtract(x, y) {
+//   return x - y;
+// }
+// function multiply(x, y) {
+//   return x * y;
+// }
+// function divide(x, y) {
+//   return x / y;
+// }
+
+// function operate(operator, operand1, operand2) {
+//   return operator(operand1, operand2);
+// }
+
+// console.log(operate(divide, operate(add, 2, 3), operate(multiply, 4, 5)));
+
+// const operators = {
+//   add: (x, y) => x + y,
+
+//   subtract: (x, y) => x - y,
+
+//   multiply: (x, y) => x * y,
+
+//   divide: (x, y) => x / y,
+//   pow: Math.pow,
+// };
+
+// function operate2(operation, operand1, operand2) {
+//   if (typeof operators[operation] === "function") {
+//     return operators[operation](operand1, operand2);
+//   } else throw "Unknown operator";
+// }
+// console.log(operate2("add", "hello", operate2("add", " ", "world")));
+// console.log(operate2("pow", 10, 2));
+// console.log(operate2("add", 5, 6));
+
+// ? closures
+
+// let scope = "global scope";
+// function checkscope() {
+//   let scope = "local scope";
+//   function f() {
+//     return scope;
+//   }
+//   return f;
+// }
+// let s = checkscope()();
+// console.log(s);
+
+// let uniqueInteger = (function () {
+//   let counter = 0;
+//   return function () {
+//     return counter++;
+//   };
+// })();
+
+// console.log(uniqueInteger());
+// console.log(uniqueInteger());
+// console.log(uniqueInteger());
+
+// function counter() {
+//   let n = 0;
+//   return {
+//     count: function () {
+//       return n++;
+//     },
+//     reset: function () {
+//       n = 0;
+//     },
+//   };
+// }
+// let c = counter(),
+//   d = counter();
+// console.log(c.count());
+// console.log(d.count());
+// console.log(c.reset());
+// console.log(c.count());
+// console.log(d.count());
+// console.log(c.count());
+// console.log(d.count());
+
+// function counter(n) {
+//   return {
+//     get count() {
+//       return n++;
+//     },
+//     set count(m) {
+//       if (m > n) n = m;
+//       else throw Error("count can only be set to a larger value");
+//     },
+//   };
+// }
+// let c = counter(1000);
+// console.log(c.count);
+// console.log(c.count);
+// console.log(c.count);
+// console.log((c.count = 2000));
+// console.log(c.count);
+// console.log(c.count);
+// function addPrivateProperty(o, name, predicate) {
+//   let value;
+//   o[`get${name}`] = function () {
+//     return value;
+//   };
+//   o[`set${name}`] = function (v) {
+//     if (predicate && !predicate(v)) {
+//       throw new TypeError(`set${name}: invalid value ${v}`);
+//     } else {
+//       value = v;
+//     }
+//   };
+// }
+
+// let o = {};
+
+// addPrivateProperty(o, "Name", (x) => typeof x === "string");
+
+// o.setName("Frank");
+// console.log(o.getName());
+// // console.log(o.setName(0));
+
+// function constfunc(v) {
+//   return () => v;
+// }
+// let funcs = [];
+// for (var i = 0; i < 10; i++) funcs[i] = constfunc(i);
+
+// console.log(funcs[9]());
+
+// function constfuncs() {
+//   let funcs = [];
+//   for (let i = 0; i < 10; i++) {
+//     funcs[i] = () => i;
+//   }
+//   return funcs;
+// }
+
+// let funcs = constfuncs();
+// console.log(funcs[5]());
+
+// function trace(o, m) {
+//   let original = o[m];
+//   o[m] = function (...args) {
+//     console.log(new Date(), "Entering", m);
+//     let result = original.apply(this, args);
+//     console.log(new Date(), "Exiting", m);
+//     return result;
+//   };
+// }
+
+// console.log(trace());
+// ? bind
+// function f(y) {
+//   return this.x + y;
+// }
+// let o = { x: 3 };
+// let g = f.bind(o);
+// // console.log(g(2));
+// let p = { x: 10, g };
+// console.log(p.g(2));
+
+// let sum = (x, y) => x + y;
+// let succ = sum.bind(null, 1);
+// console.log(succ(5));
+
+// function f(y, z) {
+//   return this.x + y + z;
+// }
+// let g = f.bind({ x: 1 }, 2);
+// console.log(g(3));
+// ? functional programming
+// const map = function (a, ...args) {
+//   return a.map(...args);
+// };
+// const reduce = function (a, ...args) {
+//   return a.reduce(...args);
+// };
+
+// const sum = (x, y) => x + y;
+// const square = (x) => x * x;
+
+// let data = [1, 1, 3, 5, 5];
+// let mean = reduce(data, sum) / data.length;
+// let deviations = map(data, (x) => x - mean);
+// let stddev = Math.sqrt(
+//   reduce(map(deviations, square), sum) / (data.length - 1)
+// );
+
+// console.log(stddev);
+
+// ? higher order functions
+// function not(f) {
+//   return function (...args) {
+//     let result = f.apply(this, args);
+//     return !result;
+//   };
+// }
+// const even = (x) => x % 2 === 0;
+// const odd = not(even);
+// console.log([(1, 1, 3, 5, 5)].every(odd));
+
+// const map = function (a, ...args) {
+//   return a.map(...args);
+// };
+
+// function mapper(f) {
+//   return (a) => map(a, f);
+// }
+
+// const increment = (x) => x + 1;
+// const incrementAll = mapper(increment);
+// console.log(incrementAll([1, 2, 3]));
+
+// function compose(f, g) {
+//   return function (...args) {
+//     return f.call(this, g.apply(this, args));
+//   };
+// }
+// const sum = (x, y) => x + y;
+// const square = (x) => x * x;
+// console.log(compose(square, sum)(2, 3));
+
+// ? partial application of functions
+
+// function partialLeft(f, ...outerArgs) {
+//   return function (...innerArgs) {
+//     let args = [...outerArgs, ...innerArgs];
+//     return f.apply(this, args);
+//   };
+// }
+
+// function partialRight(f, ...outerArgs) {
+//   return function (...innerArgs) {
+//     let args = [...innerArgs, ...outerArgs];
+//     return f.apply(this, args);
+//   };
+// }
+
+// function partial(f, ...outerArgs) {
+//   return function (...innerArgs) {
+//     let args = [...outerArgs];
+//     let innerIndex = 0;
+//     for (let i = 0; i < args.length; i++) {
+//       if (args[i] === undefined) args[i] = innerArgs[innerIndex++];
+//     }
+//     args.push(...innerArgs.slice(innerIndex));
+
+//     return f.apply(this, args);
+//   };
+// }
+// const f = function (x, y, z) {
+//   return x * (y - z);
+// };
+
+// console.log(partialLeft(f, 2)(3, 4));
+// console.log(partialRight(f, 2)(3, 4));
+// console.log(partial(f, undefined, 2)(3, 8, 12));
+
+// const increment = partialLeft(sum, 1);
+// const cuberoot = partialRight(Math.pow, 1 / 3);
+
+// console.log(cuberoot(increment(26)));
+// const not = partialLeft(compose, (x) => !x);
+// const even = (x) => x % 2 === 0;
+// const odd = not(even);
+// const isNumber = not(isNaN);
+// console.log(odd(3) && isNumber(2));
+
+// const product = (x, y) => x * y;
+// const neg = partial(product, -1);
+// const sqrt = partial(Math.pow, undefined, 0.5);
+// const reciprocal = partial(Math.pow, undefined, neg(1));
+
+// let data = [1, 1, , 3, 5, 5];
+// let mean = product(reduce(data, sum), reciprocal(data.length));
+// let stddev = sqrt(
+//   product(
+//     reduce(map(data, compose(square, partial(sum, neg(mean)))), sum),
+//     reciprocal(sum(data.length, neg(1)))
+//   )
+// );
+// console.log([mean, stddev]);
+
+// ? momoization
+
+// function memoize(f) {
+//   const cache = new Map();
+//   return function (...args) {
+//     let key = args.length + args.join("+");
+//     if (cache.has(key)) {
+//       return cache.get(key);
+//     } else {
+//       let result = f.apply(this, args);
+//       cache.set(key, result);
+//       return result;
+//     }
+//   };
+// }
+
+// function gcd(a, b) {
+//   if ((a, b)) {
+//     [a, b] = [b, a];
+//   }
+//   while (b !== 0) {
+//     [a, b] = [b, a % b];
+//   }
+//   return a;
+// }
+// const gcdmemo = memoize(gcd);
+// console.log(gcdmemo(85, 187));
+
+// const factorial = memoize(function (n) {
+//   return n <= 1 ? 1 : n * factorial(n - 1);
+// });
+// console.log(factorial(5));
