@@ -665,3 +665,167 @@
 //   return n <= 1 ? 1 : n * factorial(n - 1);
 // });
 // console.log(factorial(5));
+// ? simple javascript class
+
+// function range(from, to) {
+//   let r = Object.create(range.methods);
+//   r.from = from;
+//   r.to = to;
+//   return r;
+// }
+// range.methods = {
+//   includes(x) {
+//     return this.from <= x && x <= this.to;
+//   },
+//   *[Symbol.iterator]() {
+//     for (let x = Math.ceil(this.from); x <= this.to; x++) yield x;
+//   },
+//   toString() {
+//     return "(" + this.from + "..." + this.to + ")";
+//   },
+// };
+
+// let r = range(1, 30);
+// console.log(r.includes(31));
+// console.log(r.toString(), [...r]);
+// console.log(range.methods.isPrototypeOf(r));
+
+// ? range class using a constructor
+
+// function Range(from, to) {
+//   this.from = from;
+//   this.to = to;
+// }
+// Range.prototype = {
+//   includes: function (x) {
+//     return this.from <= x && x <= this.to;
+//   },
+//   [Symbol.iterator]: function* () {
+//     for (let x = Math.ceil(this.from); x <= this.to; x++) yield x;
+//   },
+//   toString: function () {
+//     return "(" + this.from + "..." + this.to + ")";
+//   },
+// };
+// let r = new Range(1, 3);
+// console.log(r.includes(2));
+// console.log(r.toString(), [...r]);
+// console.log(r instanceof Range);
+
+// class Range {
+//   constructor(from, to) {
+//     this.from = from;
+//     this.to = to;
+//   }
+//   includes(x) {
+//     return this.from <= x && x <= this.to;
+//   }
+//   *[Symbol.iterator]() {
+//     for (let x = Math.ceil(this.from); x <= this.to; x++) yield x;
+//   }
+//   toString() {
+//     return `(${this.from}...${this.to})`;
+//   }
+// }
+// let r = new Range(2, 6);
+// console.log(r.includes(3));
+
+// class Span extends Range {
+//   constructor(start, length) {
+//     if (length >= 0) {
+//       super(start, start + length);
+//     } else {
+//       super(start + length, start);
+//     }
+//   }
+// }
+// let s = new Span(4, 9);
+// console.log(s.toString());
+
+// class Circle {
+//   radius = 10; // Public field
+
+//   getArea() {
+//     return Math.PI * this.radius * this.radius;
+//   }
+// }
+
+// const myCircle = new Circle();
+// console.log(myCircle.radius); // Output: 10
+
+// ? Complex number class
+// class Complex {
+//   constructor(real, imaginary) {
+//     this.r = real;
+//     this.i = imaginary;
+//   }
+//   plus(that) {
+//     return new Complex(this.r + that.r, this.i + that.i);
+//   }
+//   times(that) {
+//     return new Complex(
+//       this.r * that.r - this.i * that.i,
+//       this.r * that.i + this.i * that.r
+//     );
+//   }
+//   static sum(c, d) {
+//     return c.plus(d);
+//   }
+//   static product(c, d) {
+//     return c.times(d);
+//   }
+//   get real() {
+//     return this.r;
+//   }
+//   get imaginary() {
+//     return this.i;
+//   }
+//   get magnitude() {
+//     return Math.hypot(this.r, this.i);
+//   }
+//   toString() {
+//     return `{${this.r},${this.i}}`;
+//   }
+//   equals(that) {
+//     return that instanceof Complex && this.r === that.r && this.i === that.i;
+//   }
+// }
+
+// Complex.ZERO = new Complex(0, 0);
+// Complex.ONE = new Complex(1, 0);
+// Complex.I = new Complex(0, 1);
+
+// let c = new Complex(2, 3);
+// console.log(c);
+// let d = new Complex(c.i, c.r);
+// console.log(d);
+// console.log(c.plus(d).toString());
+// console.log(c.magnitude);
+// console.log(Complex.product(c, d));
+// console.log(Complex.ZERO.toString());
+
+// Complex.prototype.conj = function () {
+//   return new Complex(this.r, -this.i);
+// };
+// console.log(c.conj(2, 3));
+
+// ? class compositions
+// class Engine {
+//   start() {
+//     console.log("Engine started.");
+//   }
+// }
+
+// class Car {
+//   constructor() {
+//     this.engine = new Engine();
+//   }
+
+//   startCar() {
+//     this.engine.start();
+//     console.log("Car started.");
+//   }
+// }
+
+// const myCar = new Car();
+// myCar.startCar();
