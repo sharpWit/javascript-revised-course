@@ -829,3 +829,277 @@
 
 // const myCar = new Car();
 // myCar.startCar();
+
+// ? a hierarchy of abstract and concrete set classes
+
+// class AbstractSet {
+//   has(x) {
+//     throw new Error("Abstract method");
+//   }
+// }
+
+// class NotSet extends AbstractSet {
+//   constructor(set) {
+//     super();
+//     this.set = set;
+//   }
+//   has(x) {
+//     return !this.set.has(x);
+//   }
+//   toString() {
+//     return `{x| x > ${this.set.toString()}}`;
+//   }
+// }
+
+// class RangeSet extends AbstractSet {
+//   constructor(from, to) {
+//     super();
+//     this.from = from;
+//     this.to = to;
+//   }
+//   has(x) {
+//     return x >= this.from && x <= this.to;
+//   }
+//   toString() {
+//     return `{ x| ${this.from} <= x <= ${this.to}}`;
+//   }
+// }
+
+// class AbstractEnumerableSet extends AbstractSet {
+//   get size() {
+//     throw new Error("Abstract method");
+//   }
+//   [Symbol.iterator]() {
+//     throw new Error("Abstract method");
+//   }
+//   isEmpty() {
+//     return this.size === 0;
+//   }
+//   toString() {
+//     return `{${Array.from(this).join(". ")}}`;
+//   }
+//   equals(set) {
+//     if (!(set instanceof AbstractEnumerableSet)) return false;
+//     if (this.size !== set.size) return false;
+//     for (let element of this) {
+//       if (!set.has(element)) return false;
+//     }
+//     return true;
+//   }
+// }
+
+// class SingletonSet extends AbstractEnumerableSet {
+//   constructor(member) {
+//     super();
+//     this.member = member;
+//   }
+//   has(x) {
+//     return x === this.member;
+//   }
+//   get size() {
+//     return 1;
+//   }
+//   *[Symbol.iterator]() {
+//     yield this.member;
+//   }
+// }
+
+// class AbstractWriteableSet extends AbstractEnumerableSet {
+//   insert(x) {
+//     throw new Error("Abstract method");
+//   }
+//   remove(x) {
+//     throw new Error("Abstract method");
+//   }
+//   add(set) {
+//     for (let element of set) {
+//       this.insert(element);
+//     }
+//   }
+//   subtract(set) {
+//     for (let element of set) {
+//       this.remove(element);
+//     }
+//   }
+//   intersect(set) {
+//     for (let element of this) {
+//       if (!set.has(element)) {
+//         this.remove(element);
+//       }
+//     }
+//   }
+// }
+
+// class BitSet extends AbstractEnumerableSet {
+//   constructor(max) {
+//     super();
+//     this.max = max;
+//     this.n = 0;
+//     this.numBytes = Math.floor(max / 8) + 1;
+//     this.data = new Uint8Array(this.numBytes);
+//   }
+//   _valid(x) {
+//     return Number.isInteger(x) && x >= 0 && x <= this.max;
+//   }
+//   _has(byte, bit) {
+//     return (this.data[byte] & BitSet.bits[bit]) !== 0;
+//   }
+//   has(x) {
+//     if (this._valid(x)) {
+//       let byte = Math.floor(x / 8);
+//       let bit = x % 8;
+//       return this._has(byte, bit);
+//     } else {
+//       return false;
+//     }
+//   }
+//   insert(x) {
+//     if (this._valid(x)) {
+//       let byte = Math.floor(x / 8);
+//       let bit = x % 8;
+//       if (!this._has(byte, bit)) {
+//         this.data[byte] |= BitSet.bits[bit];
+//         this.n++;
+//       }
+//     } else {
+//       throw new TypeError("Invalid set element: " + x);
+//     }
+//   }
+//   remove(x) {
+//     if (this._valid(x)) {
+//       let byte = Math.floor(x / 8);
+//       let bit = x % 8;
+//       if (this._has(byte, bit)) {
+//         this.data[byte] &= BitSet.masks[bit];
+//         this.n--;
+//       }
+//     } else {
+//       throw new TypeError("Invalid set element " + x);
+//     }
+//   }
+//   get size() {
+//     return this.n;
+//   }
+//   *[Symbol.iterator]() {
+//     for (let i = 0; i <= this.max; i++) {
+//       if (this.has(i)) {
+//         yield i;
+//       }
+//     }
+//   }
+// }
+
+// BitSet.bits = new Uint8Array([1, 2, 4, 8, 16, 32, 64, 128]);
+// BitSet.masks = new Uint8Array([~1, ~1, ~4, ~8, ~16, ~32, ~64, ~128]);
+
+// console.log(BitSet.bits);
+// console.log(BitSet.masks);
+// ? JS standard library
+
+// ! set
+// let s = new Set();
+// let t = new Set([1, s]);
+// console.log(t);
+
+// let unique = new Set("missisippi");
+// console.log(unique);
+
+// console.log(s.size);
+// console.log(s.add(1));
+// console.log(s.add(true));
+// console.log(s.add([1, 2, 3]));
+// console.log(s.size);
+// console.log(s.delete(1));
+// console.log(s.size);
+// console.log(s.delete([1, 2, 3]));
+// console.log(s.clear());
+// console.log(s);
+// console.log(s.add("a").add("b").add("c"));
+
+// let oneDigitPrimes = new Set([2, 3, 5, 7]);
+// console.log(oneDigitPrimes.has(3));
+
+// let sum = 0;
+// for (let p of oneDigitPrimes) {
+//   sum += p;
+// }
+// console.log(sum);
+
+// console.log([...oneDigitPrimes]);
+// console.log(Math.max(...oneDigitPrimes));
+
+// let product = 1;
+// oneDigitPrimes.forEach((n) => {
+//   product *= n;
+// });
+// console.log(product);
+// ! map
+
+// let m = new Map();
+// console.log(m.set("one", 1));
+// console.log(m.set("two", 2));
+// console.log(m.set("one", true));
+// console.log(m.clear());
+// let m = new Map().set("one", 1).set("two", 2).set("three", 3);
+// console.log(m);
+// console.log(m.size);
+// console.log(m.get("two"));
+// let m = new Map([
+//   ["one", 1],
+//   ["two", 2],
+// ]);
+// console.log([...m]);
+// console.log([...m.keys()]);
+// console.log([...m.values()]);
+// console.log([...m.entries()]);
+
+// let n = new Map([
+//   ["one", 1],
+//   ["two", 2],
+// ]);
+// console.log(n);
+
+// let copy = new Map(n);
+// let o = { x: 1, y: 2 };
+// let p = new Map(Object.entries(o));
+
+// console.log(copy);
+// console.log(o);
+// console.log(p);
+// ? typed array
+
+// let bytes = new Uint8Array(1024);
+// let matrix = new Float64Array(9);
+// let point = new Int16Array(3);
+// let rgba = new Uint8ClampedArray(4);
+// let sudoku = new Int8Array(81);
+
+// console.log(bytes);
+// console.log(matrix);
+// console.log(point);
+// console.log(rgba);
+// console.log(sudoku);
+
+// let white = Uint8ClampedArray.of(255, 255, 255, 0);
+// console.log(white);
+
+// let ints = Uint32Array.from(white);
+// console.log(ints);
+
+// console.log(Uint8Array.of(1.23, 2.99, 45000));
+
+// let buffer = new ArrayBuffer(1024 * 1024);
+// console.log(buffer.byteLength);
+
+function sieve(n) {
+  let a = new Uint8Array(n + 1);
+  let max = Math.floor(Math.sqrt(n));
+  let p = 2;
+  while (p <= max) {
+    for (let i = 2 * p; i <= n; i += p) a[i] = 1;
+    while (a[++p] /* empty */);
+  }
+  while (a[n]) n--;
+  return n;
+}
+console.log(sieve(999));
