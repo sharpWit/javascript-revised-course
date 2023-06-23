@@ -1091,15 +1091,223 @@
 // let buffer = new ArrayBuffer(1024 * 1024);
 // console.log(buffer.byteLength);
 
-function sieve(n) {
-  let a = new Uint8Array(n + 1);
-  let max = Math.floor(Math.sqrt(n));
-  let p = 2;
-  while (p <= max) {
-    for (let i = 2 * p; i <= n; i += p) a[i] = 1;
-    while (a[++p] /* empty */);
-  }
-  while (a[n]) n--;
-  return n;
-}
-console.log(sieve(999));
+// function sieve(n) {
+//   let a = new Uint8Array(n + 1);
+//   let max = Math.floor(Math.sqrt(n));
+//   let p = 2;
+//   while (p <= max) {
+//     for (let i = 2 * p; i <= n; i += p) a[i] = 1;
+//     while (a[++p] /* empty */);
+//   }
+//   while (a[n]) n--;
+//   return n;
+// }
+// console.log(sieve(999));
+
+// let ints = new Int16Array(10);
+// console.log(ints);
+// console.log(
+//   ints
+//     .fill(3)
+//     .map((x) => x * x)
+//     .join("")
+// );
+
+// ? RegExp
+// console.log("JavaScript".search(/script/iu));
+// console.log("Python".search(/script/iu));
+// let text = "lorem javascript let ints = new Int16Array(10)";
+// console.log(text.replace(/javascript/gi, "JavaScript"));
+
+// let quote = /"([^"]*)"/g;
+
+// console.log('He said "stop"'.replace(quote, "~$1~"));
+
+// console.log("7 plus 8 equals 15".match(/\d+/g));
+
+// let url = /(w+):\/\/([w.]+)\/(\S*)/;
+// let text = "Visit my blog at http://www.example.com/~david";
+// let match = text.match(url);
+// let fullurl, protocol, host, path;
+// if (match !== null) {
+//   fullurl = match[0];
+//   protocol = match[1];
+//   host = match[2];
+//   path = match[3];
+//   console.log(path);
+// }
+
+// let url = /(?<protocol>\w+):\/\/(?<host>[w.]+)\/(?<path>\S*)/;
+// let text = "Visit my blog at http://www.example.com/~david";
+// let match = text.match(url);
+// console.log(match[0]);
+
+// const words = /\b\p{Alphabetic}+\b/gu;
+// const text = "This is a native test of the matchAll() method.";
+// for (let word of text.matchAll(words)) {
+//   console.log(`Found '${word[0]}' at index ${word.index}. `);
+// }
+
+// console.log("123,456,789".split(","));
+
+// console.log("1, 2, 3, \n4, 5".split(/\s*,\s*/));
+
+// let zipcode = new RegExp("\\d{5}", "g");
+
+// console.log(zipcode);
+
+// let pattern = /Java/g;
+// let text = "JavaScript > Java";
+// let match;
+// while ((match = pattern.exec(text)) !== null) {
+//   console.log(`Matched ${match[0]} at ${match.index}`);
+//   console.log(`Next search begins at ${pattern.lastIndex}`);
+// }
+
+// let century = new Date(Date.UTC(2100, 0, 1));
+
+// console.log(century);
+// ? Error calsses
+// class HTTPError extends Error {
+//   constructor(status, statusText, url) {
+//     super(`${status} ${statusText}: ${url}`);
+//     this.status = status;
+//     this.statusText = statusText;
+//     this.url = url;
+//   }
+//   get name() {
+//     return "HTTPError";
+//   }
+// }
+
+// let error = new HTTPError(404, "Not Found", "http://example.com/");
+// console.log(error.status);
+// console.log(error.message);
+// console.log(error.name);
+
+// ? JSON serialization and parsing
+// let o = { s: "", n: 0, a: [true, false, null] };
+// let s = JSON.stringify(o);
+// let copy = JSON.parse(s);
+
+// console.log(s);
+// console.log(copy);
+// let data = JSON.parse(text, function (key, value) {
+//   if (key[0] === "_") return undefined;
+//   if (
+//     typeof value === "string" &&
+//     /^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d.\d\d\dZ$/.test(value)
+//   ) {
+//     return new Date(value);
+//   }
+//   return value;
+// });
+// ? formatting number
+// let euros = Intl.NumberFormat("es", { style: "currency", currency: "EUR" });
+// let pounds = Intl.NumberFormat("en", { style: "currency", currency: "GBP" });
+
+// console.log(euros.format(10));
+// console.log(pounds.format(1000));
+
+// let data = [0.05, 0.75, 1];
+// let formatData = Intl.NumberFormat(undefined, {
+//   style: "percent",
+//   minimumFractionDigits: 1,
+//   maximumFractionDigits: 1,
+// }).format;
+// console.log(data.map(formatData));
+// ! Arabic number
+/*
+let arabic = Intl.NumberFormat("ar", { useGrouping: false }).format;
+
+const node = document.createElement("div");
+const body = document
+  .querySelector("body")
+  .appendChild(node)
+  .classList.add("shomare");
+
+// Create a text node:
+const textnode = document.createTextNode(arabic(1234567890));
+
+// Append the text node to the "li" node:
+node.appendChild(textnode);
+*/
+
+// ? formatting Dates and Time
+
+// let d = new Date("2020-01-02T13:14:15Z");
+// console.log(Intl.DateTimeFormat("en-US").format(d));
+// console.log(Intl.DateTimeFormat("fr-FR").format(d));
+// console.log(Intl.DateTimeFormat("fa-IR").format(d));
+
+// let opts = { weekday: "long", month: "long", year: "numeric", day: "numeric" };
+// console.log(Intl.DateTimeFormat("en-US", opts).format(d));
+// console.log(Intl.DateTimeFormat("fa-IR", opts).format(d));
+// console.log(Intl.DateTimeFormat("en-u-ca-persian", opts).format(d));
+// console.log(Intl.DateTimeFormat("fa-u-ca-persian", opts).format(d));
+// console.log(Intl.DateTimeFormat("es-ES", opts).format(d));
+
+// opts = { hour: "numeric", minute: "2-digit", timeZone: "America/New_York" };
+// console.log(Intl.DateTimeFormat("fr-CA", opts).format(d));
+
+// ? URL
+// let url = new URL("https://example.com:8000/path/name?q=term#fragment");
+// console.log(url.href);
+// console.log(url.origin);
+// console.log(url.protocol);
+// console.log(url.host);
+// console.log(url.hostname);
+// console.log(url.port);
+// console.log(url.pathname);
+// console.log(url.search);
+// console.log(url.hash);
+
+// ? timers
+
+// setTimeout(() => {
+//   console.log("Ready...");
+// }, 1000);
+// setTimeout(() => {
+//   console.log("set...");
+// }, 2000);
+// setTimeout(() => {
+//   console.log("go!...");
+// }, 3000);
+
+// let clock = setInterval(() => {
+//   console.clear();
+//   console.log(new Date().toLocaleTimeString());
+// }, 1000);
+
+// setTimeout(() => {
+//   clearInterval(clock);
+// }, 10000);
+// ? iterator
+// let sum = 0;
+// for (let i of [1, 2, 3]) {
+//   sum += i;
+// }
+// console.log(sum);
+
+// ! spread operator
+// let chars = [..."abcd"];
+// console.log(chars);
+// let data = [1, 2, 3, 4, 5];
+// console.log(Math.max(...data));
+
+// let purpleHaze = Uint8Array.of(255, 0, 255, 128);
+// let [r, g, b, a] = purpleHaze;
+// console.log(a);
+
+// let m = new Map([
+//   ["one", 1],
+//   ["two", 2],
+//   ["three", 3],
+// ]);
+// for (let [k, v] of m) console.log(k, v);
+
+// console.log([...m.entries()]);
+// console.log([...m.keys()]);
+// console.log([...m.values()]);
+
+// console.log(new Set("abc"));
