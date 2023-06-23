@@ -1311,3 +1311,164 @@ node.appendChild(textnode);
 // console.log([...m.values()]);
 
 // console.log(new Set("abc"));
+
+// let iterable = [99];
+// let iterator = iterable[Symbol.iterator]();
+// for (let result = iterator.next(); !result.done; result = iterator.next()) {
+//   console.log(result.value);
+// }
+// let list = [1, 2, 3, 4, 5];
+// let iter = list[Symbol.iterator]();
+// console.log(iter);
+// let head = iter.next().value;
+// console.log(head);
+// let tail = [...iter];
+// console.log(tail);
+
+// class Range {
+//   constructor(from, to) {
+//     this.from = from;
+//     this.to = to;
+//   }
+//   has(x) {
+//     return typeof x === "number" && this.from <= x && x <= this.to;
+//   }
+//   toString() {
+//     return `{x | ${this.from} ≦ x ≧ ${this.to}}`;
+//   }
+//   [Symbol.iterator]() {
+//     let next = Math.ceil(this.from);
+//     let last = this.to;
+//     return {
+//       next() {
+//         return next <= last ? { value: next++ } : { done: true };
+//       },
+//       [Symbol.iterator]() {
+//         return this;
+//       },
+//     };
+//   }
+// }
+// for (let x of new Range(1, 10)) console.log(x);
+// console.log(...new Range(-2, 2));
+// console.log(...new Range(-2, 2).toString());
+
+// function map(iterable, f) {
+//   let iterator = iterable[Symbol.iterator]();
+//   return {
+//     [Symbol.iterator]() {
+//       return this;
+//     },
+//     next() {
+//       let v = iterator.next();
+//       if (v.done) {
+//         return v;
+//       } else {
+//         return { value: f(v.value) };
+//       }
+//     },
+//   };
+// }
+// console.log([...map(new Range(1, 4), (x) => x * x)]);
+
+// function filter(iterable, predicate) {
+//   let iterator = iterable[Symbol.iterator]();
+//   return {
+//     [Symbol.iterator]() {
+//       return this;
+//     },
+//     next() {
+//       for (;;) {
+//         let v = iterator.next();
+//         if (v.done || predicate(v.value)) {
+//           return v;
+//         }
+//       }
+//     },
+//   };
+// }
+// console.log([...filter(new Range(1, 10), (x) => x % 2 === 0)]);
+
+// function words(s) {
+//   var r = /\s+|$/g;
+//   r.lastIndex = s.match(/[^ ]/).index;
+//   return {
+//     [Symbol.iterator]() {
+//       return this;
+//     },
+//     next() {
+//       let start = r.lastIndex;
+//       if (start < s.length) {
+//         let match = r.exec(s);
+//         if (match) {
+//           return { value: s.substring(start, match.index) };
+//         }
+//       }
+//       return { done: true };
+//     },
+//   };
+// }
+// console.log([...words(" abc def  ghi! ")]);
+// ? generator function
+// function* oneDigitPrimes() {
+//   yield 2;
+//   yield 3;
+//   yield 5;
+//   yield 7;
+// }
+// let primes = oneDigitPrimes();
+// console.log(primes.next().value);
+// console.log(primes.next().value);
+// console.log(primes.next().value);
+// console.log(primes.next().value);
+// console.log(primes.next().done);
+// console.log(primes[Symbol.iterator]());
+// console.log([...oneDigitPrimes()]);
+
+// let sum = 0;
+// for (let prime of oneDigitPrimes()) sum += prime;
+
+// console.log(sum);
+
+// const seq = function* (from, to) {
+//   for (let i = from; i <= to; i++) yield i;
+// };
+// console.log([...seq(3, 5)]);
+
+// let o = {
+//   x: 1,
+//   y: 2,
+//   z: 3,
+//   *g() {
+//     for (let key of Object.keys(this)) {
+//       yield key;
+//     }
+//   },
+// };
+// console.log([...o.g()]);
+// ! Fibonacci Sequence
+function* fibonacciSequence() {
+  let x = 0,
+    y = 1;
+  for (;;) {
+    yield y;
+    [x, y] = [y, x + y];
+  }
+}
+
+function fibonacci(n) {
+  for (let f of fibonacciSequence()) {
+    if (n-- <= 0) return f;
+  }
+}
+console.log(fibonacci(20));
+
+function* take(n, iterable) {
+  let it = iterable[Symbol.iterator]();
+  while (n-- > 0) {
+    let next = it.next();
+    if (next.done) return;
+    else yield next.value;
+  }
+}
+console.log([...take(20, fibonacciSequence())]);
