@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- This is an HTML5 file -->
+<html>
+  <!-- The root element -->
+  <head>
+    <!-- Title, scripts & styles can go here -->
+    <title>Digital Clock</title>
+    <style>
+      /* A CSS stylesheet for the clock */
+      #clock {
+        /* Styles apply to element with id="clock" */
+        font: bold 24px sans-serif; /* Use a big bold font */
+        background: #ddf; /* on a light bluish-gray background. */
+        padding: 15px; /* Surround it with some space */
+        border: solid black 2px; /* and a solid black border */
+        border-radius: 10px; /* with rounded corners. */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The body holds the content of the document. -->
+    <h1>Digital Clock</h1>
+    <!-- Display a title. -->
+    <span id="clock"></span>
+    <!-- We will insert the time into this element. -->
+    <script>
+      // ? loading script on demand
+      function importScript(url) {
+        return new Promise((resolve, reject) => {
+          let s = document.createElement("script");
+          s.onload = () => {
+            resolve();
+          };
+          s.onerror = (e) => {
+            reject(e);
+          };
+          s.src = url;
+          document.body.append(s);
+        });
+      }
+      importScript("./main.js");
+    </script>
+  </body>
+</html>
