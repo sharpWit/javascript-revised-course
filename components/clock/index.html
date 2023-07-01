@@ -23,22 +23,5 @@
     <!-- Display a title. -->
     <span id="clock"></span>
     <!-- We will insert the time into this element. -->
-    <script>
-      // ? loading script on demand
-      function importScript(url) {
-        return new Promise((resolve, reject) => {
-          let s = document.createElement("script");
-          s.onload = () => {
-            resolve();
-          };
-          s.onerror = (e) => {
-            reject(e);
-          };
-          s.src = url;
-          document.body.append(s);
-        });
-      }
-      importScript("./main.js");
-    </script>
   </body>
 </html>

@@ -49,3 +49,43 @@ body {
   background-color: #28b487;
   color: #0a0a23;
 }
+
+.greeting {
+  font-size: 2rem;
+  color: tomato;
+}
+
+#TOC {
+  border: solid black 1px;
+  margin: 10px;
+  padding: 10px;
+}
+.TOCEntry {
+  margin: 5px 0px;
+}
+.TOCEntry a {
+  text-decoration: none;
+}
+.TOCLevel1 {
+  font-size: 18pt;
+  font-weight: bold;
+}
+.TOCLevel2 {
+  font-size: 16pt;
+  margin-left: 0.1in;
+}
+.TOCLevel3 {
+  font-size: 14pt;
+  margin-left: 0.25in;
+}
+.TOCLevel4 {
+  font-size: 12pt;
+  margin-left: 0.5in;
+}
+.TOCLevel5 {
+  font-size: 10pt;
+  margin-left: 0.75in;
+}
+.TOCSectNum:after {
+  display: none;
+}
