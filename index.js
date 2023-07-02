@@ -1,87 +1,20 @@
-"use strict";
+// ? Importing module
 
-// ? loading script on demand
-// function importScript(url) {
-//   return new Promise((resolve, reject) => {
-//     let s = document.createElement("script");
-//     s.onload = () => {
-//       resolve();
-//     };
-//     s.onerror = (e) => {
-//       reject(e);
-//     };
-//     s.src = url;
-//     document.body.append(s);
-//   });
-// }
-// importScript("./components/clock/main.js");
+// import { addToCart, totalPrice as price, tq } from "./shoppingCart.js";
+// addToCart("bread", 5);
+// console.log(price, tq);
 
-// let body = document.querySelector("body");
-// let para = document.createElement("p");
-// let emp = document.createElement("em");
-// body.appendChild(para);
-// emp.append("World");
-// para.append("Hello ", emp, "!");
-// para.prepend("!");
-// para.innerHTML;
+console.log("Importing module");
+// console.log(shippingCost);
 
-// let greeting = document.querySelector("h1.greeting");
+// import * as ShoppingCart from "./shoppingCart.js";
 
-// greeting.append(para);
-// greeting.append(para, document.createElement("hr"));
+// ShoppingCart.addToCart("bread", 5);
+// console.log(ShoppingCart.totalPrice);
 
-// greeting.after(para.cloneNode(true));
-
-// greeting.replaceWith(para);
-
-// para.remove();
-
-// ? Generating a table of content with the DOM API
-
-document.addEventListener("DOMContentLoaded", () => {
-  let toc = document.querySelector("#TOC");
-  if (!toc) {
-    toc = document.createElement("div");
-    toc.id = "TOC";
-    document.body.prepend(toc);
-  }
-
-  let headings = document.querySelectorAll("h2,h3,h4,h5,h6");
-
-  let sectionNumbers = [0, 0, 0, 0, 0];
-
-  for (let heading of headings) {
-    if (heading.parentNode === toc) {
-      continue;
-    }
-
-    let level = parseInt(heading.tagName.charAt(1)) - 1;
-
-    sectionNumbers[level - 1]++;
-    for (let i = level; i < sectionNumbers.length; i++) {
-      sectionNumbers[i] = 0;
-    }
-
-    let sectionNumber = sectionNumbers.slice(0, level).join(".");
-    let span = document.createElement("span");
-    span.className = "TOCSectNum";
-    span.textContent = sectionNumber;
-    heading.prepend(span);
-
-    let anchor = document.createElement("a");
-    let fragmentName = `TOC${sectionNumber}`;
-    anchor.name = fragmentName;
-    heading.before(anchor);
-    anchor.append(heading);
-
-    let link = document.createElement("a");
-    link.href = `#${fragmentName}`;
-
-    link.innerHTML = heading.innerHTML;
-
-    let entry = document.createElement("div");
-    entry.classList.add("TOCEntry", `TOCLevel${level}`);
-    entry.append(link);
-    toc.append(entry);
-  }
-});
+// import add, { addToCart, totalPrice as price, tq } from "./shoppingCart.js";
+import add, { cart } from "./shoppingCart.js";
+add("pizza", 2);
+add("bread", 5);
+add("apples", 4);
+console.log(cart);
